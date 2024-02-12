@@ -1,0 +1,101 @@
+.auth{
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.form{
+    width: 35rem;
+    padding: 1.5rem;
+    animation: slide-up 0.5s ease;
+    background-color: #fff;
+}
+
+h2{
+    color: var(--color-danger);
+    text-align: center;
+}
+
+.form form {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      display: block;
+      font-size: 1.6rem;
+      font-weight: 300;
+      padding: 1rem;
+      margin: 1rem auto;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-bottom: 3px solid #ccc;
+      border-radius: 3px;
+      outline: none;
+    }
+}
+
+.form form input{
+    padding: 1rem 6rem;
+    margin: .5rem ;
+    border-radius: .5rem;
+    border: 1px solid rgb(4, 4, 63);
+    margin-left: 1.5rem;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+  }
+
+  .register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }  
+
+  .register p{
+    text-align: center;
+    margin: 1rem;
+  }
+
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+  }  
+
+  .login p{
+    text-align: center;
+    margin: 1rem;
+  }
+  
+  .black{
+    color: orangered;
+      }
+
+  @keyframes slide-up {
+    0% {
+      transform: translateY(-5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  @keyframes slide-down {
+    0% {
+      transform: translateY(5rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
+@media screen and (max-width: 700px) {
+  .img {
+    display: none;
+  }
+}
