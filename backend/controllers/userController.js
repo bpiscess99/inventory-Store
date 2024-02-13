@@ -167,7 +167,12 @@ const updateUser = asyncHandler (async (req, res) => {
 
     const updatedUser = await user.save()
     res.status(200).json({
-        _id: updatedUser._id, name: updatedUser.name, email: updatedUser.email, photo: updatedUser.photo, phone: updatedUser.phone, bio: updatedUser.bio,
+        _id: updatedUser._id, 
+        name: updatedUser.name, 
+        email: updatedUser.email, 
+        photo: updatedUser.photo, 
+        phone: updatedUser.phone, 
+        bio: updatedUser.bio,
     });
 } else {
     res.status(404);
