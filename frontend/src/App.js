@@ -16,7 +16,10 @@ import Dashboard from './pages/dashboard/Dashboard.js';
 import AddProduct from './pages/addProduct/AddProduct.js';
 import SideBar from './components/sidebar/SideBar.js';
 import ProductDetail from './components/product/productDetail/ProductDetail.js';
+import axios from 'axios';
 
+
+axios.defaults.withCredentials = true;
 
 
 function App() {

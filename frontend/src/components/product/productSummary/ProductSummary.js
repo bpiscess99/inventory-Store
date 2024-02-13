@@ -38,7 +38,8 @@ const ProductSummary = ({products}) => {
         dispatch(CALC_OUTOFSTOCK(products))
         dispatch(CALC_CATEGORY(products))        
     }, [dispatch, products]);
-  return (
+
+    return (
     <div className='product-summary'>
         <h3 className='--mt'>Inventory Stats</h3>
         <div className='info-summary'>

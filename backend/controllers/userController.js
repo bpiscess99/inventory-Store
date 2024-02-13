@@ -49,7 +49,7 @@ const token = generateToken(user._id)
 
 // Send HTTP-only cookie
 res.cookie("token", token, {
-    path: "/",
+    path: "/", // even if we will not set path it will be by default home page
     httpOnly: true,
     expires: new Date(Date.now() + 1000 * 86400), // 1 day
     sameSite: "none",
@@ -85,7 +85,8 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
 // User exist , check if password is correct
-    const passwordIsCorrect = await bcrypt.compare(password, user.password)  
+
+    const passwordIsCorrect = await bcrypt.compare(password, user.password) // compare will decrypt the password and will match normal password then will return true
 
     // Generate a token   
 const token = generateToken(user._id)
@@ -173,6 +174,7 @@ const updateUser = asyncHandler (async (req, res) => {
         photo: updatedUser.photo, 
         phone: updatedUser.phone, 
         bio: updatedUser.bio,
+
     });
 } else {
     res.status(404);

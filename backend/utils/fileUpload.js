@@ -1,4 +1,4 @@
-const multer = require("multer")
+const multer = require("multer"); // multer is a middleware and use to store the uploaded files in memory or on disk
 
 // Define file storage
 const storage = multer.diskStorage({
