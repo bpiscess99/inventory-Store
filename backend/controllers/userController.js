@@ -156,7 +156,7 @@ const loginStatus = asyncHandler (async (req, res) => {
 
 // Update User
 const updateUser = asyncHandler (async (req, res) => {
-    const user = await User.findByIda(req.user._id); 
+    const user = await User.findById(req.user._id); 
 
     if(user){
     const {name, email, photo, phone, bio} = user;

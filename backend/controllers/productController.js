@@ -8,7 +8,7 @@ const createProduct = asyncHandler(async (req, res) => {
   const { name, sku, category, quantity, price, description } = req.body;
 
   //  Validation
-  if (!name || category || quantity || price || description) {
+  if (!name || !category || !quantity || !price || !description) {
     res.status(400);
     throw new Error("Please fill all required field");
   }
@@ -95,14 +95,14 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   //   if product doesn't exist
   if (!product) {
-    res.status(400);
+    res.status(404);
     throw new Error("Product not found");
   }
 
   // Match product to it's user
   if (product.user.toString() !== req.user.id) {
     // toString() return string as string and convert a string object into a string
-    res.status(400);
+    res.status(401);
     throw new Error("User not Authorized");
   }
 
@@ -129,10 +129,10 @@ const updateProduct = asyncHandler(async (req, res) => {
     };
   }
 
-  //   udpate Product
-  const updateProduct = await Product.findByIdAndUpdate(
+  //   update Product
+  const updatedProduct = await Product.findByIdAndUpdate(
+    {_id: id},
     {
-      _id: id,
       name,
       category,
       quantity,
@@ -145,7 +145,7 @@ const updateProduct = asyncHandler(async (req, res) => {
       runValidators: true, 
     }
   );
-  res.status(200).json(updateProduct);
+  res.status(200).json({"product updated": updatedProduct});
 });
 
 module.exports = {
