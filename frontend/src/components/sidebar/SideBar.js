@@ -4,6 +4,7 @@ import { HiMenuAlt3 } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import menu from '../../data/sidebar';
 import SidebarItem from './SidebarItem';
+import "./SideBar.scss"
 
 const SideBar = ({children}) => {
 

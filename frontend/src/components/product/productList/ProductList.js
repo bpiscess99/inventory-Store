@@ -7,8 +7,9 @@ import {FaEdit, FaTrashAlt} from 'react-icons/fa';
 import { useDispatch, useSelector } from "react-redux";
 import {deleteProduct, getProducts} from '../../../redux/features/product/productSlice'
 import { FILTER_PRODUCTS, selectFilteredProducts } from "../../../redux/features/product/filterSlice";
-import ReactPaginate from 'react-paginate';
-import confirmAlert from 'react-confirm-alert'
+import ReactPaginate from 'react-paginate'; // use to show the list of product that how much will show in one row
+import confirmAlert from 'react-confirm-alert'; // screen will pop to do something like delete
+import  './ProductList.scss'
 
 const ProductList = ({ products, isLoading }) => {
   const [search, setSearch] = useState("");

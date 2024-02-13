@@ -12,7 +12,7 @@ import {
     CALC_CATEGORY,
     selectTotalStoreValue
 } from "../../../redux/features/product/productSlice";
-import './ProductSummary.css'
+import './ProductSummary.scss'
 
 
 // Icons
@@ -61,8 +61,8 @@ const ProductSummary = ({products}) => {
             <InfoBox
             icon={outOfStockIcon}
             title={"Out Of Stock"}
-            count={outOfStock !== undefined ? outOfStock : 0}
-            bgColor=''card3
+            count={outOfStock}
+            bgColor='card3'
             />
 
             <InfoBox

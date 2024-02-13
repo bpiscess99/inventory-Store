@@ -3,8 +3,8 @@ import ProductList from '../../components/product/productList/ProductList';
 import ProductSummary from '../../components/product/productSummary/ProductSummary'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/features/auth/authSlice';
-import { getProducts } from '../../redux/features/product/productSlice';
 import useRedirectLoggedOutUser from '../../customHook/useRedirectLoggedOutUser';
+import { getProducts } from '../../redux/features/product/productSlice';
 
 const Dashboard = () => {
   useRedirectLoggedOutUser("/login")
@@ -25,8 +25,8 @@ const Dashboard = () => {
   }, [isLoggedIn, isError, message, dispatch]);
   return (
     <div>
-      <ProductList products={products}/>
       <ProductSummary products={products} isLoading={isLoading}/>
+      <ProductList products={products}/>
     </div>
   )
 }
