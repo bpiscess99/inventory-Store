@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { selectIsLoggedIn } from '../../../redux/features/auth/authSlice';
 import useRedirectLoggedOutUser from '../../../customHook/useRedirectLoggedOutUser';
 import DOMPurify from 'dompurify';
+import './ProductDetail.scss'
 
 
 const ProductDetail = () => {

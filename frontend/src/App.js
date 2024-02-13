@@ -16,6 +16,7 @@ import Dashboard from './pages/dashboard/Dashboard.js';
 import AddProduct from './pages/addProduct/AddProduct.js';
 import SideBar from './components/sidebar/SideBar.js';
 import ProductDetail from './components/product/productDetail/ProductDetail.js';
+// import EditProduct from './pages/editProfile/EditProfile.js'
 import axios from 'axios';
 
 
