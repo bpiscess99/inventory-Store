@@ -15,7 +15,7 @@ const productSchema = mongoose.Schema(
         trim: true,
       },
 
-      sku: {
+      sku: {  // Stock Keeping Unit
         type: String,
         required: true,
         default: "SKU",

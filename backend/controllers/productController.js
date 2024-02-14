@@ -13,7 +13,7 @@ const createProduct = asyncHandler(async (req, res) => {
     throw new Error("Please fill all required field");
   }
 
-  // Handle image uplaod
+  // Handle image upload
   let fileData = {};
   if (req.file) {
     // Save image to cloudinary
@@ -48,7 +48,9 @@ const createProduct = asyncHandler(async (req, res) => {
     image: fileData,
   });
 
-  res.status(201).json(product);
+  res.status(201).json({
+    "Product Added Successfully": product
+  });
 });
 
 // Get All Products

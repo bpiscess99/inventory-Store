@@ -233,10 +233,11 @@ const forgotPassword = asyncHandler ( async (req, res) => {
 
     // Create Reset Token
     let resetToken = crypto.randomBytes(32).toString("hex") + user._id
-    console.log(resetToken);
+    console.log("reset token", resetToken);
 
 //   Hash token before saving to DB
 const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex")
+console.log("hashed token",hashedToken)
      
     // Save token to DB
     await new Token({
@@ -260,7 +261,8 @@ const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex")
        <p>Regards...</p>
        <p>Pinvent Team</p>
        `;
-
+        
+    //  Send Email
        const subject = "Password Reset Request"
        const send_to = user.email
        const sent_from = process.env.EMAIL_USER 
@@ -277,18 +279,20 @@ const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex")
 // Reset Password
 
 const resetPassword = asyncHandler (async (req, res) => {
-    const {password} = req.body
-    const {resetToken} = req.params
+    const {password} = req.body;
+    const {resetToken} = req.params;
+    // console.log("reset token", resetToken)
 
 //   Hash token, then compare to Token in
-const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+// const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+// console.log("Hashed Token", hashedToken)
 
 // Find token in DB
 const userToken = await Token.findOne({
-    token: hashedToken,
+    token: resetToken,
     expiresAt: {$gt: Date.now()}
 })
-
+console.log("hashedToken", userToken)
 if(!userToken){
    res.status(500)
    throw new Error("Invalid or Expired Token")
@@ -296,6 +300,8 @@ if(!userToken){
 
 // Find User
 const user = await User.findOne({_id: userToken.userId})
+
+// Now Reset Password
 user.password = password 
 await user.save()
 res.status(200).json({
