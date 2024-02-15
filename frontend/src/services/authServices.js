@@ -2,6 +2,7 @@ import axios from 'axios';
 import {toast} from 'react-toastify';
 
 export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = `${BACKEND_URL}/api/users/`;
 
 export const validateEmail = (email) => {
     return email.match(
@@ -12,8 +13,7 @@ export const validateEmail = (email) => {
 // Register
 export const registerUser = async(userData) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/users/register",
-        userData,
+        const response = await axios.post(API_URL + "register", userData,
         {withCredentials: true}
         );
         if(response.statusText === "OK"){
@@ -33,8 +33,7 @@ export const registerUser = async(userData) => {
 
 export const loginUser = async(userData) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/users/login",
-        userData
+        const response = await axios.post(API_URL + "login", userData
         );
         if(response.statusText === "OK"){
             toast.success("User Login Successfully");
@@ -52,7 +51,7 @@ export const loginUser = async(userData) => {
 // Logout
 export const logoutUser = async()=> {
     try {
-      await axios.get("http://localhost:5000/api/users/logout",);
+      await axios.get(API_URL + "logout",);
     } catch (error) {
         const message = 
         (error.response && error.response.data && error.response.data.message) ||
@@ -65,7 +64,7 @@ export const logoutUser = async()=> {
 // Forgot Password
 export const forgotUser = async (userData) => {
     try {
-        const response = await axios.post("http://localhost:5000/api/users/forgotpassword",
+        const response = await axios.post(API_URL + "forgotpassword",
         userData
         );
         toast.success(response.data.message);
@@ -81,7 +80,7 @@ export const forgotUser = async (userData) => {
 // Reset Password 
 export const resetPassword = async (userData, resetToken) => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/users/resetpassword/${resetToken}`,
+        const response = await axios.put(API_URL + `resetpassword/${resetToken}`,
         userData
         );
         return response.data
@@ -97,7 +96,7 @@ export const resetPassword = async (userData, resetToken) => {
 // Get login Status
 export const getLoginStatus = async () => {
     try {
-        const response = await axios.get(`http://localhost:5000/api/users/loggedin`);
+        const response = await axios.get(API_URL + "loggedin");
         return response.data
     } catch (error) {
         const message =
@@ -111,7 +110,7 @@ export const getLoginStatus = async () => {
 // Get User Profile
 export const userProfile = async () => {
     try {
-        const response = await axios.get("http://localhost:5000/api/users/getuser");
+        const response = await axios.get(API_URL + "getuser");
         return response.data
     } catch (error) {
         const message = 
@@ -125,7 +124,7 @@ export const userProfile = async () => {
 // update Profile
 export const updateUser = async () => {
     try {
-        const response = await axios.patch("http://localhost:5000/api/users/updateuser",
+        const response = await axios.patch(API_URL + "updateuser",
         FormData
         );
         return response.data

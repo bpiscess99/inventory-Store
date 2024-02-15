@@ -3,13 +3,13 @@ const multer = require("multer"); // multer is a middleware and use to store the
 // Define file storage
 const storage = multer.diskStorage({
     destination: function  (req, file, cb) {
-        cb(null, '/tmp/my-uploads')
+        cb(null, 'uploads')
       },
       filename: function (req, file, cb) {
      
         cb(
             null, 
-            new Date().toISOString().replace(/:/g, "-") + "-" + file.fieldname 
+            new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
             );
       },
 });  

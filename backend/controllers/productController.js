@@ -3,6 +3,18 @@ const asyncHandler = require("express-async-handler");
 const { fileSizeFormatter } = require("../utils/fileUpload");
 const cloudinary = require("cloudinary").v2;
 
+// Configure Cloudinary with your cloud name and API key/secret
+
+const cloudinaryApiKey = process.env.CLOUDINARY_API_KEY;
+const cloudinaryApiSecret = process.env.CLOUDINARY_API_SECRET;
+
+cloudinary.config({
+  cloud_name: "umairdev",
+  api_key: cloudinaryApiKey,
+  api_secret: cloudinaryApiSecret,
+});
+// api_key: "778786747673568",
+//   api_secret: "iEH85A2-PmRSj2Cu9XNi7xWpiX4"
 // Create Product
 const createProduct = asyncHandler(async (req, res) => {
   const { name, sku, category, quantity, price, description } = req.body;
@@ -17,23 +29,24 @@ const createProduct = asyncHandler(async (req, res) => {
   let fileData = {};
   if (req.file) {
     // Save image to cloudinary
-    let uploadFile;
+    let uploadedFile;
     try {
-      uploadFile = await cloudinary.uploader.upload(req.file.path, {
+      uploadedFile = await cloudinary.uploader.upload(req.file.path, {
         folder: "ecommerce",
         resource_type: "image",
       });
-    } catch {
-      res.status(500);
-      throw new Error("Image could not be uploaded");
-    }
+    
 
     fileData = {
       fileName: req.file.originalname,
-      filePath: uploadFile.secure_url,
+      filePath: uploadedFile.secure_url,
       fileType: req.file.mimetype,
       fileSize: fileSizeFormatter(req.file.size, 2),
     };
+  } catch (error) {
+    res.status(500);
+    throw new Error("Image could not be uploaded");
+  }
   }
 
   // Create new product
