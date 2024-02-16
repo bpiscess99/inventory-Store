@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {deleteProduct, getProducts} from '../../../redux/features/product/productSlice'
 import { FILTER_PRODUCTS, selectFilteredProducts } from "../../../redux/features/product/filterSlice";
 import ReactPaginate from 'react-paginate'; // use to show the list of product that how much will show in one row
-import confirmAlert from 'react-confirm-alert'; // screen will pop to do something like delete
+import {confirmAlert} from 'react-confirm-alert'; // screen will pop to do something like delete
+import "react-confirm-alert/src/react-confirm-alert.css";
 import  './ProductList.scss'
 
 const ProductList = ({ products, isLoading }) => {
@@ -18,9 +19,9 @@ const ProductList = ({ products, isLoading }) => {
   const dispatch = useDispatch();
 
   const shortenText = (text, n) => {
-    if (text.length > n) {
+    if (text && text.length > n) {
       const shortenedYText = text.substring(0, n).concat("...");
-      return shortenedYText;
+      return shortenedYText;  
     }
     return text;
   };
@@ -31,7 +32,7 @@ const ProductList = ({ products, isLoading }) => {
     await dispatch(getProducts())
   }
 
-  const confirmDelete = async(id) => {
+  const confirmDelete = (id) => {
     confirmAlert({
         title: "Delete Product",
         message: "Are you sure you want to delete this product",
@@ -41,7 +42,7 @@ const ProductList = ({ products, isLoading }) => {
                 onClick: () => delProduct(id),
             },
             {
-                label: "Cancel"
+                label: "Cancel",
             },
         ],
     });
@@ -107,7 +108,7 @@ useEffect(() => {
 
               <tbody>
                 {currentItems.map((product, index) => {
-                  const { _id, name, category, price, quantity } = product;
+                  const { _id, name, category, price, quantity, value } = product;
                   return (
                     <tr key={_id}>
                       <td>{index + 1}</td>

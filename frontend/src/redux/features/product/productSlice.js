@@ -102,6 +102,7 @@ const productSlice = createSlice({
     reducers: {
         CALC_STORE_VALUE(state, action){
             const products = action.payload;
+            console.log("reducerStoreValue:", action.payload);
             const array = [];
             products.map((item) => {
                 const {price, quantity} = item;
@@ -110,11 +111,13 @@ const productSlice = createSlice({
             });
             const totalValue = array.reduce((a, b) => { // reduce() return the single value
                 return a + b
-            }, 0);
+            }, 0);         
             state.totalStoreValue = totalValue;
         },
+        
         CALC_OUTOFSTOCK(state, action){
             const products = action.payload;
+            console.log("OutofStock", action.payload);
             const array = [];
             products.map((item) => {
                 const {quantity} = item;
@@ -130,6 +133,7 @@ const productSlice = createSlice({
         },
         CALC_CATEGORY(state, action){
             const products = action.payload;
+            console.log("category:", action.payload);
             const array = [];
             products.map((item) => {
                 const {category} = item;
@@ -166,7 +170,7 @@ const productSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.isError = false;
-            console.log(action.payload);
+            // console.log(action.payload);
             state.products = action.payload;
         })
         .addCase(getProducts.rejected, (state, action) => {
@@ -186,7 +190,7 @@ const productSlice = createSlice({
         })
         .addCase(deleteProduct.rejected, (state, action) => {
             state.isLoading = false;
-            state.isError = false;
+            state.isError = true;
             state.message = action.payload;
             toast.error(action.payload);
             state.product = action.payload;

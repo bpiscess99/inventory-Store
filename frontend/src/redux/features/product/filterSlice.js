@@ -10,12 +10,20 @@ const filterSlice = createSlice({
     reducers: {
         FILTER_PRODUCTS(state, action){
             const { products, search } = action.payload;
+            if(!search){
+                state.filteredProducts = products;
+            }else{
             const tempProducts = products.filter(
-                (product) =>
-                product.name.toLowerCase().includes(search.toLowerCase()) ||
+                (product) =>  
+                 (product &&
+                product.name &&
+                product.category &&
+                (product.name.toLowerCase().includes(search.toLowerCase()) ||
                 product.category.toLowerCase().includes(search.toLowerCase()) 
-            );
+            )));
             state.filteredProducts = tempProducts;
+            // return { ...state, filteredProducts: tempProducts };
+        }
         },
     },
 }) ;

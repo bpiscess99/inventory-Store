@@ -30,14 +30,16 @@ export const formatNumbers = (x) => {
 const ProductSummary = ({products}) => {
     const dispatch = useDispatch();
     const totalStoreValue = useSelector(selectTotalStoreValue);
+        console.log("summaryTotalStoreValue", totalStoreValue)
     const outOfStock = useSelector(selectOutOfStock);
     const category = useSelector(selectCategory);
 
     useEffect(() => {
         dispatch(CALC_STORE_VALUE(products))
+        // console.log("summaryTotalStoreValue", totalStoreValue)
         dispatch(CALC_OUTOFSTOCK(products))
         dispatch(CALC_CATEGORY(products))        
-    }, [dispatch, products]);
+    }, [dispatch]);
 
     return (
     <div className='product-summary'>
@@ -54,7 +56,7 @@ const ProductSummary = ({products}) => {
             <InfoBox
             icon={earningIcon}
             title={"Total Store Value"}
-            count={`$${totalStoreValue !== undefined ? formatNumbers(totalStoreValue.toFixed(2)): "N/A"}`}
+            count={`$${formatNumbers(totalStoreValue.toFixed(2))}`}
             bgColor='card2'
             />
             
