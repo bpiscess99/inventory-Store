@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {deleteProduct, getProducts} from '../../../redux/features/product/productSlice'
 import { FILTER_PRODUCTS, selectFilteredProducts } from "../../../redux/features/product/filterSlice";
 import ReactPaginate from 'react-paginate'; // use to show the list of product that how much will show in one row
-import {confirmAlert} from 'react-confirm-alert'; // screen will pop to do something like delete
+import {confirmAlert} from 'react-confirm-alert'; // screen will pop up to do something like delete
 import "react-confirm-alert/src/react-confirm-alert.css";
 import  './ProductList.scss'
 
@@ -108,7 +108,7 @@ useEffect(() => {
 
               <tbody>
                 {currentItems.map((product, index) => {
-                  const { _id, name, category, price, quantity, value } = product;
+                  const { _id, name, category, price, quantity } = product;
                   return (
                     <tr key={_id}>
                       <td>{index + 1}</td>

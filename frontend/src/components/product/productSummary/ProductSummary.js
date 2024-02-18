@@ -30,16 +30,15 @@ export const formatNumbers = (x) => {
 const ProductSummary = ({products}) => {
     const dispatch = useDispatch();
     const totalStoreValue = useSelector(selectTotalStoreValue);
-        console.log("summaryTotalStoreValue", totalStoreValue)
+        // console.log("summaryTotalStoreValue", totalStoreValue)
     const outOfStock = useSelector(selectOutOfStock);
     const category = useSelector(selectCategory);
 
     useEffect(() => {
         dispatch(CALC_STORE_VALUE(products))
-        // console.log("summaryTotalStoreValue", totalStoreValue)
         dispatch(CALC_OUTOFSTOCK(products))
         dispatch(CALC_CATEGORY(products))        
-    }, [dispatch]);
+    }, [dispatch, products]);
 
     return (
     <div className='product-summary'>
@@ -70,7 +69,7 @@ const ProductSummary = ({products}) => {
             <InfoBox
             icon={categoryIcon}
             title={"All Categories"}
-            count={category}
+            count={category.length}
             bgColor='card4'
             />
             

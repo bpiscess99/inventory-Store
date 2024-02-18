@@ -108,7 +108,7 @@ export const getLoginStatus = async () => {
 };
 
 // Get User Profile
-export const userProfile = async () => {
+export const getUser = async () => {
     try {
         const response = await axios.get(API_URL + "getuser");
         return response.data
@@ -122,9 +122,9 @@ export const userProfile = async () => {
 };
 
 // update Profile
-export const updateUser = async () => {
+export const changePassword = async () => {
     try {
-        const response = await axios.patch(API_URL + "updateuser",
+        const response = await axios.patch(API_URL + "changepassword",
         FormData
         );
         return response.data

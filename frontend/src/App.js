@@ -16,8 +16,9 @@ import Dashboard from './pages/dashboard/Dashboard.js';
 import AddProduct from './pages/addProduct/AddProduct.js';
 import SideBar from './components/sidebar/SideBar.js';
 import ProductDetail from './components/product/productDetail/ProductDetail.js';
-// import EditProduct from './pages/editProfile/EditProfile.js'
+import EditProduct from './pages/ediProduct/EditProduct.js'
 import axios from 'axios';
+import Profile from './pages/profile/Profile.js';
 
 
 axios.defaults.withCredentials = true;
@@ -69,9 +70,31 @@ function App() {
 
       <Route 
       path='/product-detail/:id'
-      element={<SideBar>
+      element={
+      <SideBar>
         <Layout>
           <ProductDetail/>
+        </Layout>
+      </SideBar>
+      }
+      />
+
+      <Route 
+      path='/edit-product/:id'
+      element={
+      <SideBar>
+        <Layout>
+          <EditProduct/>
+        </Layout>
+      </SideBar>}
+      />
+
+<Route 
+      path='/profile'
+      element={
+      <SideBar>
+        <Layout>
+          <Profile/>
         </Layout>
       </SideBar>}
       />

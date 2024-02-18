@@ -30,13 +30,14 @@ const ProductDetail = () => {
   };
 
   useEffect(() => {
-    if(isLoading === true){
+    // console.log("Product ID:", id)
+    if(isLoggedIn === true){
       dispatch(getProduct(id))
     }
     if(isError){
       console.log(message)
     }
-  }, [isLoggedIn, isError, message, dispatch, id, isLoading]);
+  }, [isLoggedIn, isError, message, dispatch, id ]);
 
   return (
     <div className='product-detail'>
@@ -68,7 +69,8 @@ const ProductDetail = () => {
               <b>&rarr; Category : </b> {product.category}
             </p>
             <p>
-              <b>&rarr; Price : </b> {"$"} {product.price}
+              <b>&rarr; Price : </b> {"$"} 
+              {product.price}
             </p>
             <p>
               <b>&rarr; Quantity in Stock : </b> {product.quantity}
@@ -85,11 +87,11 @@ const ProductDetail = () => {
             ></div>
             <hr/>
             <code className='--color-dark'>
-              Created on: {product.createdAt.toLocalString("en-US")}
+              Created on: {product.createdAt.toLocaleString("en-US")}
             </code>
             <br/>
             <code className='--color-dark'>
-              Last Updated: {product.updatedAt.toLocalString("en-US")}
+              Last Updated: {product.updatedAt.toLocaleString("en-US")}
             </code>            
  
           </div>

@@ -35,7 +35,7 @@ const AddProduct = () => {
         setImagePreview(URL.createObjectURL(e.target.files[0]))
     };
 
-    const generateKSKU = () => {
+    const generateSKU = () => {
         const letter = category.slice(0, 3).toUpperCase();
         const number = Date.now();
         const sku = letter + "-" + number;
@@ -46,7 +46,7 @@ const AddProduct = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("name", name);
-        formData.append("sku", generateKSKU(category));
+        formData.append("sku", generateSKU(category));
         formData.append("category", category);
         formData.append("quantity", Number(quantity));
         formData.append("price", price);
