@@ -79,7 +79,7 @@ try {
             value={password}
             onChange={handleInputChange} />
 
-            <button type='sumbit' className='--btn --btn-primary --btn-block'>Login</button>
+            <button type='submit' className='--btn --btn-primary --btn-block'>Login</button>
         </form>
         <Link to="/forgot" className='black'>Forgot Password</Link>
 

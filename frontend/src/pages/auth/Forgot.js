@@ -9,7 +9,7 @@ const Forgot = () => {
     const [email, setEmail] = useState("");
 
 const forgot = async (e) => {
-    e.preventDafault();
+    e.preventDefault();
     if(!email){
         return toast.error("Please enter an email")
     }
@@ -22,7 +22,7 @@ const forgot = async (e) => {
         email,
     }
     await forgotUser(userData)
-    setEmail("")
+    setEmail("");
 }    
   return (
     <div className='auth'>
@@ -30,7 +30,7 @@ const forgot = async (e) => {
             <div className='--flex-center'>
                <AiOutlineMail size={35} color='#999'/>
             </div>
-            <h2>Forgot Passwor</h2>
+            <h2>Forgot Password</h2>
 
             <form onSubmit={forgot}>
                 <input 

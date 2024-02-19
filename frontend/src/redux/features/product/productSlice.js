@@ -22,8 +22,11 @@ export const createProduct = createAsyncThunk(
             return await productService.createProduct(formData);
         } catch (error) {
             const message =
-            (error.response && error.response.data && error.response.data.message) ||
-            error.message || error.toString();
+            (error.response && 
+                error.response.data && 
+                error.response.data.message) ||
+            error.message || 
+            error.toString();
             console.log(message)
             return thunkAPI.rejectWithValue(message)
         }
@@ -84,7 +87,7 @@ export const  updateProduct = createAsyncThunk(
     "products/updateProduct",
     async ({id, formData}, thunkAPI) => {
         try {
-            return await productService.updateProduct(id, formData);
+            return await productService(id, formData);
         } catch (error) {
             const message =
             (error.response && error.response.data && error.response.data.message) ||
@@ -202,12 +205,11 @@ const productSlice = createSlice({
             state.isLoading = false;
             state.isSuccess = true;
             state.isError = false;
-            // console.log(action.payload)
             state.product = action.payload;
         })
         .addCase(getProduct.rejected, (state, action) => {
             state.isLoading = false;
-            state.isError = true;
+            state.isError = false;
             state.message = action.payload;
             toast.error(action.payload);
         })

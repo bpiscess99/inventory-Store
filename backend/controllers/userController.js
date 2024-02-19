@@ -263,8 +263,8 @@ console.log("hashed token",hashedToken)
        `;
         
     //  Send Email
-       const subject = "Password Reset Request"
-       const send_to = user.email
+       const subject = "Password Reset Request";
+       const send_to = user.email;
        const sent_from = process.env.EMAIL_USER 
        
        try {

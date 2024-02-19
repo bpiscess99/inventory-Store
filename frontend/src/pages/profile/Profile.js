@@ -38,6 +38,9 @@ const Profile = () => {
    ): (
    <Card cardClass={"card --flex-dir-column"}>
     <span className='profile-data'>
+        <img src={profile?.photo} alt="profilepic" />
+        </span>
+        <span>
         <p>
             <b>Name: </b> {profile?.name}
         </p>

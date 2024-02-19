@@ -122,7 +122,23 @@ export const getUser = async () => {
 };
 
 // update Profile
-export const changePassword = async () => {
+export const updateUser = async (FormData) => {
+    try {
+        const response = await axios.patch(API_URL + "updateuser",
+        FormData
+        );
+        return response.data
+    } catch (error) {
+        const message = 
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString()
+        toast.error(message)
+}
+}
+
+// Change Password
+export const changePassword = async (FormData) => {
     try {
         const response = await axios.patch(API_URL + "changepassword",
         FormData
