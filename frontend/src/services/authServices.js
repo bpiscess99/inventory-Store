@@ -24,7 +24,7 @@ export const registerUser = async(userData) => {
         const message = (error.response && error.response.data && error.response.data.message) ||
         error.message ||
         error.toString();
-        toast.toString();
+            toast.toString();
         toast.error(message)
     }
 };
@@ -80,7 +80,8 @@ export const forgotUser = async (userData) => {
 // Reset Password 
 export const resetPassword = async (userData, resetToken) => {
     try {
-        const response = await axios.put(API_URL + `resetpassword/${resetToken}`,
+        const response = await axios.put(
+            `${API_URL}resetpassword/${resetToken}`,
         userData
         );
         return response.data

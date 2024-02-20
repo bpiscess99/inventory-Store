@@ -13,7 +13,8 @@ const Reset = () => {
 const [formData, setFormData] = useState(initialState);
 const {password, password2} = formData
 
-const {resetToken} = useParams()
+const {resetToken} = useParams();
+console.log("resetToken", resetToken)
 
 const handleInputChange = (e) => {
   const {value, name} = e.target
@@ -34,8 +35,10 @@ const reset = async (e) => {
     password: "",
     password2: ""
   };
+
   try {
     const data = await resetPassword(userData, resetToken)
+    console.log("data", data)
     toast.success(data.message)
   } catch (error) {
     console.log(error.message)
