@@ -248,7 +248,7 @@ console.log("hashed token",hashedToken)
     }).save()
 
     // Construct Reset Url
-    const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${resetToken}`;
+    const resetUrl = `${process.env.FRONTEND_URL}/resetpassword/${hashedToken}`;
 
     // Reset Email
     const message = `
