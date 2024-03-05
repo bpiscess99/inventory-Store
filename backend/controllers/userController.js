@@ -244,7 +244,7 @@ console.log("hashed token",hashedToken)
         userId: user._id,
         token: hashedToken,
         createdAt: Date.now(),
-        expiresAt: Date.now() + 30 * (60 * 1000) // thirty minutes
+        expiresAt: Date.now() + 30 * (60 * 1000) // thirty minutes 
     }).save()
 
     // Construct Reset Url
