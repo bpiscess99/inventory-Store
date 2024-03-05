@@ -20,6 +20,7 @@ import EditProduct from './pages/ediProduct/EditProduct.js'
 import axios from 'axios';
 import Profile from './pages/profile/Profile.js';
 import EditProfile from './pages/profile/EditProfile.js';
+import Contact from './pages/contact/Contact.js';
 
 
 
@@ -109,6 +110,17 @@ function App() {
           <EditProfile/>
         </Layout>
       </SideBar>}
+      />
+
+      <Route
+      path="/contact-us"
+      element={
+        <SideBar>
+         <Layout>
+          <Contact/>
+         </Layout>
+        </SideBar>
+      }
       />
 
      </Routes>
