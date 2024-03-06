@@ -35,7 +35,7 @@ app.use(
 // Routes Middleware means refactor
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
-app.use("/api/contacts", contactRoute);
+app.use("/api/contactus", contactRoute);
 
 // Routes
 app.get("/", (req, res) => {
