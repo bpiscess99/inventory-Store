@@ -19,7 +19,7 @@ const Contact = () => {
         e.preventDefault();
         try {
             const response = await axios.post(`${BACKEND_URL}/api/contactus`, data);
-            subject("");
+            setSubject("");
             setMessage("");
             toast.success(response.data.message);
         } catch (error) {

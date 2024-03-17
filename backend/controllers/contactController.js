@@ -15,10 +15,10 @@ const contactUs = asyncHandler(async (req, res) => {
     //  Validation
     if(!subject || !message){
         res.status(400)
-        throw new Error("Please and subject and message")
+        throw new Error("Please require subject and message")
     };
 
-    const send_to = process.env.EMAIL_USER;
+    const send_to = user.email;
     const sent_from = process.env.EMAIL_USER;
     const reply_to = user.email;
     try{
