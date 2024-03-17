@@ -18,6 +18,7 @@ const ProductList = ({ products, isLoading }) => {
 
   const dispatch = useDispatch();
 
+  //  it's common to display only a portion of the text followed by an ellipsis ("...").there might be limited space available to display text. By shortening the text, you ensure that it fits within the designated space without overflowing or causing layout issues.
   const shortenText = (text, n) => {
     if (text && text.length > n) {
       const shortenedYText = text.substring(0, n).concat("...");
