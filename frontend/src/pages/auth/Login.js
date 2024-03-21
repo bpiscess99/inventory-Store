@@ -4,9 +4,11 @@ import { BiLogIn } from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
 import './auth.css';
 import { toast } from 'react-toastify';
-import { loginUser, validateEmail } from '../../services/authServices';
+import { loginUser,validateEmail } from '../../services/authServices';
+import { loginWithGoogle } from '../../redux/features/auth/authSlice';
 import { SET_LOGIN, SET_NAME } from '../../redux/features/auth/authSlice';
 import Loader from '../../components/loader/Loader';
+import {GoogleLogin} from "@react-oauth/google";
 
 const initialState = {
     email: "",
@@ -53,6 +55,13 @@ try {
 }
 };
 
+const googleLogin = async(credentialResponse) => {
+  await dispatch(
+    loginWithGoogle({userToken: credentialResponse.credential})
+    );
+    navigate("/dashboard")
+}; 
+
   return (
     <div className='auth'>
         {isLoading && <Loader/>}
@@ -61,6 +70,19 @@ try {
           <BiLogIn size={35} color="#999"/>
         </div>
         <h2>Login</h2>
+   
+       <div>
+        <GoogleLogin
+        onSuccess={googleLogin}
+        onError={() => {
+          console.log("Login Failed")
+          toast.error("Login Failed")
+        }}
+        useOneTap
+        /> 
+        </div>
+
+        
 
         <form onSubmit={login}>
             <input 

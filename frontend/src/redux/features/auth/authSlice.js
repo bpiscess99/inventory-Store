@@ -1,4 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {loginWithGoogleServices} from '../../../services/authServices'
+import { toast } from "react-toastify";
+
 
 const name = JSON.parse(localStorage.getItem("token"));
 
@@ -6,7 +9,11 @@ const name = JSON.parse(localStorage.getItem("token"));
 // const name = nameFromStorage ? JSON.parse(nameFromStorage) : "";
 
 const initialState = {
+    isLoading: false,
+    isSuccess: false,
+    isError: false,
     isLoggedIn: false,
+    message: "",
     name: name ? name : "",
     user: {
         name: "",
@@ -16,6 +23,27 @@ const initialState = {
         photo: "",
     },
 };
+
+
+// Login With Google
+export const loginWithGoogle = createAsyncThunk(
+    "auth/loginWithGoogle",
+    async(userToken, thunkAPI) => {
+        try {
+            return await loginWithGoogleServices(userToken);
+        } catch (error) {
+            const message = 
+            (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message ||
+                error.toString();
+                return thunkAPI.rejectWithValue(message);
+        }
+    }
+);
+
+
 
 const authSlice = createSlice({
     name: "auth",
@@ -37,6 +65,28 @@ const authSlice = createSlice({
             state.user.photo = profile.photo
         },
     },
+    extraReducers: (builder) => {
+        builder
+      // loginWithGoogle
+      .addCase(loginWithGoogle.pending, (state) => {
+        state.isLoading = true;
+    })
+    .addCase(loginWithGoogle.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isLoggedIn = true;
+         state.user = action.payload;
+        toast.success("Login Successful");
+        console.log(action.payload)
+    })
+    .addCase(loginWithGoogle.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.user = null;
+        toast.error(action.payload);
+    })
+    }
 });
 
 export const { SET_LOGIN, SET_NAME, SET_USER} = authSlice.actions;

@@ -5,8 +5,9 @@ const bcrypt = require("bcryptjs");
 const Token = require('../models/tokenModel');
 const crypto = require('crypto');
 const sendEmail = require('../utils/sendEmail');
+const {OAuth2Client} = require("google-auth-library")
 
-
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const generateToken = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {expiresIn: "1d"})
@@ -310,6 +311,84 @@ res.status(200).json({
 
 });
 
+// login with google 
+const loginWithGoogle = asyncHandler(async (req, res) => {
+    const {userToken} = req.body;
+
+    const ticket = await client.verifyIdToken({
+        idToken: userToken,
+        audience: process.env.GOOGLE_CLIENT_ID
+    });
+
+    const payload = ticket.getPayload();
+    console.log('Token Audience:', payload);
+    const {name, email, picture, sub} = payload;
+    const password = Date.now() + sub;
+
+    // Check if user exist 
+    const user = await User.findOne({email})
+    if(!user){
+        // create new user
+        const newUser = await User.create({
+            name,
+            email,
+            password,
+            photo: picture,
+            isVerified: true
+        })
+
+        if(newUser){
+        // Generate token
+        const token = generateToken(user._id)
+        // Send HTTP-only token
+        res.cookie("token", token, {
+            path: "/",
+            httpOnly: true,
+            expires: new Date(Date.now() + 1000 * 86400), // 1 Day
+            sameSite: "none",
+            secure: true,
+        });
+        
+        const {_id, name, email, photo, phone, bio} = newUser;
+        res.status(200).json({
+            _id,
+            name,
+            email,
+            photo,
+            phone,
+            bio,
+            token
+        })
+        }
+    }
+    
+    // if User Exist Login
+    if(user){
+        const token = generateToken(user._id);
+        // Send Http-only cookie
+        res.cookie("token", token, {
+            path: "/",
+            httpOnly: true,
+            expires: new Date(Date.now() + 1000 * 86400), // 1 day
+            sameSite: "none",
+            secure: true,
+          });
+
+          const {_id, name, email, photo, phone, bio} = user;
+          res.status(200).json({
+              _id,
+              name,
+              email,
+              photo,
+              phone,
+              bio,
+              token
+          })
+
+    }
+
+});
+
 
 module.exports = {
     registerUser,
@@ -321,5 +400,6 @@ module.exports = {
     changePassword,
     forgotPassword,
     resetPassword,
+    loginWithGoogle
 
 };

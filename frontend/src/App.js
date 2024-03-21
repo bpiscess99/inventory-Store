@@ -21,6 +21,7 @@ import axios from 'axios';
 import Profile from './pages/profile/Profile.js';
 import EditProfile from './pages/profile/EditProfile.js';
 import Contact from './pages/contact/Contact.js';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 
@@ -42,6 +43,7 @@ function App() {
   return (
        <Router>
         <ToastContainer/>
+        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
      <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/register" element={<Register/>}/>
@@ -124,6 +126,7 @@ function App() {
       />
 
      </Routes>
+     </GoogleOAuthProvider>
     </Router>
 
   ); 

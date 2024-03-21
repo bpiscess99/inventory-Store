@@ -37,12 +37,14 @@ const updateProduct = async (id, formData) => {
 
 
 
+
+
 const productService = {
     createProduct,
     getProducts,
     getProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
 }
 
 export default productService;

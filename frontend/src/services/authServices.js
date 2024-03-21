@@ -153,3 +153,17 @@ export const changePassword = async (FormData) => {
         toast.error(message)
 }
 }
+
+export const loginWithGoogleServices = async(userToken) => {
+    try {
+        const response = await axios.post(API_URL + "google/callback", userToken)
+        return response.data;
+    } catch (error) {
+        const message = 
+        (error.response && error.response.data && error.response.data.message) ||
+        error.message ||
+        error.toString()
+        toast.error(message)
+    }
+}
+
