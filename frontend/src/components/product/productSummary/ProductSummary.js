@@ -22,8 +22,11 @@ const categoryIcon= <BiCategory size={40} color='#fff'/>
 const outOfStockIcon= <BsCartX size={40} color='#fff'/> 
 
 // Format Amount
-export const formatNumbers = (x) => {
+// x is argument and return a formatted string of number with commas like 100000 to 100,000
+export const formatNumbers = (x) => { 
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // x.toString method will convert number to string to use the replace method()
+    // It takes a number and returns a formatted string with commas for thousands separators.
   };
   
 
@@ -56,6 +59,7 @@ const ProductSummary = ({products}) => {
             icon={earningIcon}
             title={"Total Store Value"}
             count={`$${formatNumbers(totalStoreValue.toFixed(2))}`}
+            // The toFixed(2) method is used to ensure that the number has exactly two digits after the decimal point.
             bgColor='card2'
             />
             

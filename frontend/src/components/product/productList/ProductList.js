@@ -67,7 +67,6 @@ const ProductList = ({ products, isLoading }) => {
   };
 
 //   End pagination
-
 useEffect(() => {
   dispatch(FILTER_PRODUCTS({products, search}));
 }, [products, search, dispatch]);
